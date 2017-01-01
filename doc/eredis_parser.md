@@ -9,12 +9,24 @@
 ## Function Index ##
 
 
-<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#init-0">init/0</a></td><td> Initialize the parser.</td></tr><tr><td valign="top"><a href="#parse-2">parse/2</a></td><td> Parses the (possibly partial) response from Redis.</td></tr><tr><td valign="top"><a href="#parse_bulk-1">parse_bulk/1</a></td><td></td></tr><tr><td valign="top"><a href="#parse_bulk-2">parse_bulk/2</a></td><td></td></tr><tr><td valign="top"><a href="#parse_multibulk-1">parse_multibulk/1</a></td><td></td></tr><tr><td valign="top"><a href="#parse_multibulk-2">parse_multibulk/2</a></td><td></td></tr></table>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#buffer_create-0">buffer_create/0</a></td><td></td></tr><tr><td valign="top"><a href="#buffer_create-1">buffer_create/1</a></td><td></td></tr><tr><td valign="top"><a href="#init-0">init/0</a></td><td> Initialize the parser.</td></tr><tr><td valign="top"><a href="#parse-2">parse/2</a></td><td> Parses the (possibly partial) response from Redis.</td></tr><tr><td valign="top"><a href="#parse_bulk-1">parse_bulk/1</a></td><td></td></tr><tr><td valign="top"><a href="#parse_bulk-2">parse_bulk/2</a></td><td></td></tr><tr><td valign="top"><a href="#parse_multibulk-1">parse_multibulk/1</a></td><td></td></tr><tr><td valign="top"><a href="#parse_multibulk-2">parse_multibulk/2</a></td><td></td></tr></table>
 
 
 <a name="functions"></a>
 
 ## Function Details ##
+
+<a name="buffer_create-0"></a>
+
+### buffer_create/0 ###
+
+`buffer_create() -> any()`
+
+<a name="buffer_create-1"></a>
+
+### buffer_create/1 ###
+
+`buffer_create(Data) -> any()`
 
 <a name="init-0"></a>
 
