@@ -24,13 +24,13 @@
 %% API
 %%
 
--spec start_link(Host::list(),
-                 Port::integer(),
-                 Password::string(),
-                 ReconnectSleep::reconnect_sleep(),
-                 MaxQueueSize::integer() | infinity,
-                 QueueBehaviour::drop | exit) ->
-                        {ok, Pid::pid()} | {error, Reason::term()}.
+-spec start_link(Host :: list(),
+                 Port :: integer(),
+                 Password :: string(),
+                 ReconnectSleep:: redis:reconnect_sleep(),
+                 MaxQueueSize :: integer() | infinity,
+                 QueueBehaviour :: drop | exit) ->
+                        {ok, Pid :: pid()} | {error, Reason :: term()}.
 start_link(Host, Port, Password, ReconnectSleep, MaxQueueSize, QueueBehaviour) ->
     Args = [Host, Port, Password, ReconnectSleep, MaxQueueSize, QueueBehaviour],
     gen_server:start_link(?MODULE, Args, []).
@@ -246,7 +246,7 @@ add_channels(Channels, OldChannels) ->
         end
     end, OldChannels, Channels).
 
--spec handle_response(Data::binary(), State::#state{}) -> NewState::#state{}.
+-spec handle_response(Data :: binary(), State :: #state{}) -> NewState :: #state{}.
 %% @doc: Handle the response coming from Redis. This should only be
 %% channel messages that we should forward to the controlling process
 %% or queue if the previous message has not been acked. If there are

@@ -38,12 +38,12 @@ init() ->
     #pstate{}.
 
 
--spec parse(State::#pstate{}, Data::binary()) ->
-                   {ok, return_value(), NewState::#pstate{}} |
-                       {ok, return_value(), Rest::binary(), NewState::#pstate{}} |
-                       {error, ErrString::binary(), NewState::#pstate{}} |
-                       {error, ErrString::binary(), Rest::binary(), NewState::#pstate{}} |
-                       {continue, NewState::#pstate{}}.
+-spec parse(State :: #pstate{}, Data :: binary()) ->
+                   {ok, eredis:return_value(), NewState :: #pstate{}} |
+                       {ok, eredis:return_value(), Rest :: binary(), NewState :: #pstate{}} |
+                       {error, ErrString :: binary(), NewState :: #pstate{}} |
+                       {error, ErrString :: binary(), Rest :: binary(), NewState :: #pstate{}} |
+                       {continue, NewState :: #pstate{}}.
 
 %% @doc: Parses the (possibly partial) response from Redis. Returns
 %% either {ok, Value, NewState}, {ok, Value, Rest, NewState} or

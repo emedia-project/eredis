@@ -42,7 +42,7 @@ start_link(Host, Port, Password, ReconnectSleep,
 
 
 %% @doc: Callback for starting from poolboy
--spec start_link(server_args()) -> {ok, Pid::pid()} | {error, Reason::term()}.
+-spec start_link(eredis:server_args()) -> {ok, Pid :: pid()} | {error, Reason :: term()}.
 start_link(Args) ->
     Host           = proplists:get_value(host, Args, "127.0.0.1"),
     Port           = proplists:get_value(port, Args, 6379),
@@ -57,24 +57,24 @@ stop(Pid) ->
     eredis_sub_client:stop(Pid).
 
 
--spec controlling_process(Client::pid()) -> ok.
+-spec controlling_process(Client :: pid()) -> ok.
 %% @doc: Make the calling process the controlling process. The
 %% controlling process received pubsub-related messages, of which
 %% there are three kinds. In each message, the pid refers to the
 %% eredis client process.
 %%
-%%   {message, Channel::binary(), Message::binary(), pid()}
+%%   {message, Channel :: binary(), Message :: binary(), pid()}
 %%     This is sent for each pubsub message received by the client.
 %%
-%%   {pmessage, Pattern::binary(), Channel::binary(), Message::binary(), pid()}
+%%   {pmessage, Pattern :: binary(), Channel :: binary(), Message :: binary(), pid()}
 %%     This is sent for each pattern pubsub message received by the client.
 %%
-%%   {dropped, NumMessages::integer(), pid()}
+%%   {dropped, NumMessages :: integer(), pid()}
 %%     If the queue reaches the max size as specified in start_link
 %%     and the behaviour is to drop messages, this message is sent when
 %%     the queue is flushed.
 %%
-%%   {subscribed, Channel::binary(), pid()}
+%%   {subscribed, Channel :: binary(), pid()}
 %%     When using eredis_sub:subscribe(pid()), this message will be
 %%     sent for each channel Redis aknowledges the subscription. The
 %%     opposite, 'unsubscribed' is sent when Redis aknowledges removal
@@ -94,7 +94,7 @@ stop(Pid) ->
 controlling_process(Client) ->
     controlling_process(Client, self()).
 
--spec controlling_process(Client::pid(), Pid::pid()) -> ok.
+-spec controlling_process(Client :: pid(), Pid :: pid()) -> ok.
 %% @doc: Make the given process (pid) the controlling process.
 controlling_process(Client, Pid) ->
     controlling_process(Client, Pid, ?TIMEOUT).
@@ -105,7 +105,7 @@ controlling_process(Client, Pid, Timeout) ->
     gen_server:call(Client, {controlling_process, Pid}, Timeout).
 
 
--spec ack_message(Client::pid()) -> ok.
+-spec ack_message(Client :: pid()) -> ok.
 %% @doc: acknowledge the receipt of a pubsub message. each pubsub
 %% message must be acknowledged before the next one is received
 ack_message(Client) ->
@@ -114,14 +114,14 @@ ack_message(Client) ->
 
 %% @doc: Subscribe to the given channels. Returns immediately. The
 %% result will be delivered to the controlling process as any other
-%% message. Delivers {subscribed, Channel::binary(), pid()}
+%% message. Delivers {subscribed, Channel :: binary(), pid()}
 -spec subscribe(pid(), [channel()]) -> ok.
 subscribe(Client, Channels) ->
     gen_server:cast(Client, {subscribe, self(), Channels}).
 
 %% @doc: Pattern subscribe to the given channels. Returns immediately. The
 %% result will be delivered to the controlling process as any other
-%% message. Delivers {subscribed, Channel::binary(), pid()}
+%% message. Delivers {subscribed, Channel :: binary(), pid()}
 -spec psubscribe(pid(), [channel()]) -> ok.
 psubscribe(Client, Channels) ->
     gen_server:cast(Client, {psubscribe, self(), Channels}).

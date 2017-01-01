@@ -38,7 +38,7 @@
           port :: integer() | undefined,
           password :: binary() | undefined,
           database :: binary() | undefined,
-          reconnect_sleep :: reconnect_sleep() | undefined,
+          reconnect_sleep :: eredis:reconnect_sleep() | undefined,
           connect_timeout :: integer() | undefined,
 
           socket :: port() | undefined,
@@ -50,13 +50,13 @@
 %% API
 %%
 
--spec start_link(Host::list(),
-                 Port::integer(),
-                 Database::integer() | undefined,
-                 Password::string(),
-                 ReconnectSleep::reconnect_sleep(),
-                 ConnectTimeout::integer() | undefined) ->
-                        {ok, Pid::pid()} | {error, Reason::term()}.
+-spec start_link(Host :: list(),
+                 Port :: integer(),
+                 Database :: integer() | undefined,
+                 Password :: string(),
+                 ReconnectSleep :: eredis:reconnect_sleep(),
+                 ConnectTimeout :: integer() | undefined) ->
+                        {ok, Pid :: pid()} | {error, Reason :: term()}.
 start_link(Host, Port, Database, Password, ReconnectSleep, ConnectTimeout) ->
     gen_server:start_link(?MODULE, [Host, Port, Database, Password,
                                     ReconnectSleep, ConnectTimeout], []).
@@ -180,8 +180,8 @@ code_change(_OldVsn, State, _Extra) ->
 %%% Internal functions
 %%--------------------------------------------------------------------
 
--spec do_request(Req::iolist(), From::pid(), #state{}) ->
-                        {noreply, #state{}} | {reply, Reply::any(), #state{}}.
+-spec do_request(Req :: iolist(), From :: pid(), #state{}) ->
+                        {noreply, #state{}} | {reply, Reply :: any(), #state{}}.
 %% @doc: Sends the given request to redis. If we do not have a
 %% connection, returns error.
 do_request(_Req, _From, #state{socket = undefined} = State) ->
@@ -196,8 +196,8 @@ do_request(Req, From, State) ->
             {reply, {error, Reason}, State}
     end.
 
--spec do_pipeline(Pipeline::pipeline(), From::pid(), #state{}) ->
-                         {noreply, #state{}} | {reply, Reply::any(), #state{}}.
+-spec do_pipeline(Pipeline :: eredis:pipeline(), From :: pid(), #state{}) ->
+                         {noreply, #state{}} | {reply, Reply :: any(), #state{}}.
 %% @doc: Sends the entire pipeline to redis. If we do not have a
 %% connection, returns error.
 do_pipeline(_Pipeline, _From, #state{socket = undefined} = State) ->
@@ -212,7 +212,7 @@ do_pipeline(Pipeline, From, State) ->
             {reply, {error, Reason}, State}
     end.
 
--spec handle_response(Data::binary(), State::#state{}) -> NewState::#state{}.
+-spec handle_response(Data :: binary(), State :: #state{}) -> NewState :: #state{}.
 %% @doc: Handle the response coming from Redis. This includes parsing
 %% and replying to the correct client, handling partial responses,
 %% handling too much data and handling continuations.

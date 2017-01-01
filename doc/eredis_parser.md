@@ -41,7 +41,7 @@ Initialize the parser
 ### parse/2 ###
 
 <pre><code>
-parse(State::#pstate{}, Data::binary()) -&gt; {ok, <a href="#type-return_value">return_value()</a>, NewState::#pstate{}} | {ok, <a href="#type-return_value">return_value()</a>, Rest::binary(), NewState::#pstate{}} | {error, ErrString::binary(), NewState::#pstate{}} | {error, ErrString::binary(), Rest::binary(), NewState::#pstate{}} | {continue, NewState::#pstate{}}
+parse(State::#pstate{}, Data::binary()) -&gt; {ok, <a href="eredis.md#type-return_value">eredis:return_value()</a>, NewState::#pstate{}} | {ok, <a href="eredis.md#type-return_value">eredis:return_value()</a>, Rest::binary(), NewState::#pstate{}} | {error, ErrString::binary(), NewState::#pstate{}} | {error, ErrString::binary(), Rest::binary(), NewState::#pstate{}} | {continue, NewState::#pstate{}}
 </code></pre>
 <br />
 

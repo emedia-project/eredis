@@ -69,7 +69,7 @@ return "+OK\r\n", otherwise it will fail.
 ### start_link/6 ###
 
 <pre><code>
-start_link(Host::list(), Port::integer(), Database::integer() | undefined, Password::string(), ReconnectSleep::<a href="#type-reconnect_sleep">reconnect_sleep()</a>, ConnectTimeout::integer() | undefined) -&gt; {ok, Pid::pid()} | {error, Reason::term()}
+start_link(Host::list(), Port::integer(), Database::integer() | undefined, Password::string(), ReconnectSleep::<a href="eredis.md#type-reconnect_sleep">eredis:reconnect_sleep()</a>, ConnectTimeout::integer() | undefined) -&gt; {ok, Pid::pid()} | {error, Reason::term()}
 </code></pre>
 <br />
 

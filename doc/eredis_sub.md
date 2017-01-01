@@ -55,18 +55,18 @@ controlling process received pubsub-related messages, of which
 there are three kinds. In each message, the pid refers to the
 eredis client process.
 
-{message, Channel::binary(), Message::binary(), pid()}
+{message, Channel :: binary(), Message :: binary(), pid()}
 This is sent for each pubsub message received by the client.
 
-{pmessage, Pattern::binary(), Channel::binary(), Message::binary(), pid()}
+{pmessage, Pattern :: binary(), Channel :: binary(), Message :: binary(), pid()}
 This is sent for each pattern pubsub message received by the client.
 
-{dropped, NumMessages::integer(), pid()}
+{dropped, NumMessages :: integer(), pid()}
 If the queue reaches the max size as specified in start_link
 and the behaviour is to drop messages, this message is sent when
 the queue is flushed.
 
-{subscribed, Channel::binary(), pid()}
+{subscribed, Channel :: binary(), pid()}
 When using eredis_sub:subscribe(pid()), this message will be
 sent for each channel Redis aknowledges the subscription. The
 opposite, 'unsubscribed' is sent when Redis aknowledges removal
@@ -127,7 +127,7 @@ psubscribe(Client::pid(), Channels::[<a href="#type-channel">channel()</a>]) -&g
 
 Pattern subscribe to the given channels. Returns immediately. The
 result will be delivered to the controlling process as any other
-message. Delivers {subscribed, Channel::binary(), pid()}
+message. Delivers {subscribed, Channel :: binary(), pid()}
 
 <a name="pub_example-0"></a>
 
@@ -158,7 +158,7 @@ message. Delivers {subscribed, Channel::binary(), pid()}
 ### start_link/1 ###
 
 <pre><code>
-start_link(Args::<a href="#type-server_args">server_args()</a>) -&gt; {ok, Pid::pid()} | {error, Reason::term()}
+start_link(Args::<a href="eredis.md#type-server_args">eredis:server_args()</a>) -&gt; {ok, Pid::pid()} | {error, Reason::term()}
 </code></pre>
 <br />
 
@@ -199,7 +199,7 @@ subscribe(Client::pid(), Channels::[<a href="#type-channel">channel()</a>]) -&gt
 
 Subscribe to the given channels. Returns immediately. The
 result will be delivered to the controlling process as any other
-message. Delivers {subscribed, Channel::binary(), pid()}
+message. Delivers {subscribed, Channel :: binary(), pid()}
 
 <a name="unsubscribe-2"></a>
 

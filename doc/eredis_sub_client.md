@@ -53,7 +53,7 @@ __Behaviours:__ [`gen_server`](gen_server.md).
 ### start_link/6 ###
 
 <pre><code>
-start_link(Host::list(), Port::integer(), Password::string(), ReconnectSleep::<a href="#type-reconnect_sleep">reconnect_sleep()</a>, MaxQueueSize::integer() | infinity, QueueBehaviour::drop | exit) -&gt; {ok, Pid::pid()} | {error, Reason::term()}
+start_link(Host::list(), Port::integer(), Password::string(), ReconnectSleep::<a href="redis.md#type-reconnect_sleep">redis:reconnect_sleep()</a>, MaxQueueSize::integer() | infinity, QueueBehaviour::drop | exit) -&gt; {ok, Pid::pid()} | {error, Reason::term()}
 </code></pre>
 <br />
 
