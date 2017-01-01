@@ -2,6 +2,8 @@
 
 # eredis #
 
+[![Build Status](https://travis-ci.org/emedia-project/eredis.svg?branch=master)](https://travis-ci.org/emedia-project/eredis)
+
 Non-blocking Redis client with focus on performance and robustness.
 
 Supported Redis features:

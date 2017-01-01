@@ -1,6 +1,8 @@
 @title eredis
 @doc
 
+[![Build Status](https://travis-ci.org/emedia-project/eredis.svg?branch=master)](https://travis-ci.org/emedia-project/eredis)
+
 <p>Non-blocking Redis client with focus on performance and robustness.</p>
 
 <p>
