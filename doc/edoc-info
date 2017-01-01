@@ -1,0 +1,4 @@
+%% encoding: UTF-8
+{application,eredis}.
+{modules,[basho_bench_driver_eredis,basho_bench_driver_erldis,eredis,
+          eredis_client,eredis_parser,eredis_sub,eredis_sub_client]}.
