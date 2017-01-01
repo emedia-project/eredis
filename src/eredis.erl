@@ -23,7 +23,7 @@
 %% Exported for testing
 -export([create_multibulk/1]).
 
--export_type([server_args/0]).
+-export_type([reconnect_sleep/0]).
 
 -type client() :: pid()
                   | atom()
@@ -35,7 +35,8 @@
                   | {port, integer()}
                   | {database, string()}
                   | {password, string()}
-                  | {reconnect_sleep, reconnect_sleep()}.
+                  | {reconnect_sleep, reconnect_sleep()}
+                  | {connect_timeout, integer()}.
 -type server_args() :: [option()].
 -type reconnect_sleep() :: no_reconnect | integer().
 -type return_value() :: undefined | binary() | [binary() | nonempty_list()].
@@ -81,7 +82,7 @@ start_link(Host, Port, Database, Password, ReconnectSleep) ->
   start_link(Host, Port, Database, Password, ReconnectSleep, ?TIMEOUT).
 
 % @doc
-% Start an <tt>eredis_client</tt>
+% Start a Redis client
 % @end
 -spec start_link(Host :: list(),
                  Port :: integer(),
@@ -101,7 +102,7 @@ start_link(Host, Port, Database, Password, ReconnectSleep, ConnectTimeout)
                            ReconnectSleep, ConnectTimeout).
 
 % @doc
-% Start an <tt>eredis_client</tt>
+% Start a Redis client
 % @end
 -spec start_link(server_args()) -> {ok, Pid :: pid()} | {error, Reason :: term()}.
 start_link(Args) ->
@@ -114,7 +115,7 @@ start_link(Args) ->
   start_link(Host, Port, Database, Password, ReconnectSleep, ConnectTimeout).
 
 % @doc
-% Stop the <tt>eredis_client</tt>.
+% Stop the Redis client.
 % @end
 -spec stop(Client :: pid()) -> ok.
 stop(Client) ->

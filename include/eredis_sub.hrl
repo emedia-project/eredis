@@ -9,7 +9,7 @@
           parser_state :: #pstate{} | undefined,
 
           %% Channels we should subscribe to
-          channels = [] :: [channel()],
+          channels = [] :: [eredis_sub:channel()],
 
           % The process we send pubsub and connection state messages to.
           controlling_process :: undefined | {reference(), pid()},
@@ -27,4 +27,4 @@
           % for the controlling process to acknowledge the last
           % message.
           msg_state = need_ack :: ready | need_ack
-}).
+         }).

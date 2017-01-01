@@ -44,7 +44,7 @@ client() = pid() | atom() | {atom(), atom()} | {global, term()} | {via, atom(), 
 
 
 <pre><code>
-option() = {host, string()} | {port, integer()} | {database, string()} | {password, string()} | {reconnect_sleep, <a href="#type-reconnect_sleep">reconnect_sleep()</a>}
+option() = {host, string()} | {port, integer()} | {database, string()} | {password, string()} | {reconnect_sleep, <a href="#type-reconnect_sleep">reconnect_sleep()</a>} | {connect_timeout, integer()}
 </code></pre>
 
 
@@ -96,10 +96,10 @@ server_args() = [<a href="#type-option">option()</a>]
 Executes the given command in the specified connection.</td></tr><tr><td valign="top"><a href="#q_noreply-2">q_noreply/2</a></td><td>Executes the command but does not wait for a response and ignores any errors.</td></tr><tr><td valign="top"><a href="#qp-2">qp/2</a></td><td>Equivalent to <a href="#qp-3"><tt>qp(Client, Pipeline, 5000)</tt></a>.</td></tr><tr><td valign="top"><a href="#qp-3">qp/3</a></td><td>
 Executes the given pipeline (list of commands) in the
 specified connection.</td></tr><tr><td valign="top"><a href="#start_link-0">start_link/0</a></td><td>Equivalent to <a href="#start_link-4"><tt>start_link("127.0.0.1", 6379, 0, "")</tt></a>.</td></tr><tr><td valign="top"><a href="#start_link-1">start_link/1</a></td><td>
-Start an <tt>eredis_client</tt></td></tr><tr><td valign="top"><a href="#start_link-2">start_link/2</a></td><td>Equivalent to <a href="#start_link-4"><tt>start_link(Host, Port, 0, "")</tt></a>.</td></tr><tr><td valign="top"><a href="#start_link-3">start_link/3</a></td><td>Equivalent to <a href="#start_link-4"><tt>start_link(Host, Port, Database, "")</tt></a>.</td></tr><tr><td valign="top"><a href="#start_link-4">start_link/4</a></td><td>Equivalent to <a href="#start_link-5"><tt>start_link(Host, Port, Database, Password, 100)</tt></a>.</td></tr><tr><td valign="top"><a href="#start_link-5">start_link/5</a></td><td>Equivalent to <a href="#start_link-6"><tt>start_link(Host, Port, Database, Password,
+Start a Redis client.</td></tr><tr><td valign="top"><a href="#start_link-2">start_link/2</a></td><td>Equivalent to <a href="#start_link-4"><tt>start_link(Host, Port, 0, "")</tt></a>.</td></tr><tr><td valign="top"><a href="#start_link-3">start_link/3</a></td><td>Equivalent to <a href="#start_link-4"><tt>start_link(Host, Port, Database, "")</tt></a>.</td></tr><tr><td valign="top"><a href="#start_link-4">start_link/4</a></td><td>Equivalent to <a href="#start_link-5"><tt>start_link(Host, Port, Database, Password, 100)</tt></a>.</td></tr><tr><td valign="top"><a href="#start_link-5">start_link/5</a></td><td>Equivalent to <a href="#start_link-6"><tt>start_link(Host, Port, Database, Password,
 ReconnectSleep, 5000)</tt></a>.</td></tr><tr><td valign="top"><a href="#start_link-6">start_link/6</a></td><td>
-Start an <tt>eredis_client</tt></td></tr><tr><td valign="top"><a href="#stop-1">stop/1</a></td><td>
-Stop the <tt>eredis_client</tt>.</td></tr></table>
+Start a Redis client.</td></tr><tr><td valign="top"><a href="#stop-1">stop/1</a></td><td>
+Stop the Redis client.</td></tr></table>
 
 
 <a name="functions"></a>
@@ -189,7 +189,7 @@ start_link(Args::<a href="#type-server_args">server_args()</a>) -&gt; {ok, Pid::
 </code></pre>
 <br />
 
-Start an `eredis_client`
+Start a Redis client
 
 <a name="start_link-2"></a>
 
@@ -244,7 +244,7 @@ start_link(Host::list(), Port::integer(), Database::integer() | undefined, Passw
 </code></pre>
 <br />
 
-Start an `eredis_client`
+Start a Redis client
 
 <a name="stop-1"></a>
 
@@ -255,5 +255,5 @@ stop(Client::pid()) -&gt; ok
 </code></pre>
 <br />
 
-Stop the `eredis_client`.
+Stop the Redis client.
 

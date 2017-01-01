@@ -1,7 +1,5 @@
 %% Public types
 
--type channel() :: binary().
-
 -type queue() :: any().
 
 %% Continuation data is whatever data returned by any of the parse
