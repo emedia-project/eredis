@@ -1,7 +1,7 @@
 -module(eredis_tests).
 
 -include_lib("eunit/include/eunit.hrl").
--include("eredis.hrl").
+-include("../include/eredis.hrl").
 
 -import(eredis, [create_multibulk/1]).
 
@@ -134,7 +134,7 @@ multibulk_test_() ->
     ].
 
 undefined_database_test() ->
-    ?assertMatch({ok,_}, eredis:start_link("localhost", 6379, undefined)).
+    ?assertMatch({ok, _}, eredis:start_link("localhost", 6379, undefined)).
 
 tcp_closed_test() ->
     C = c(),

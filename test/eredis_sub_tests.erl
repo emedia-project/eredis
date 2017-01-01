@@ -1,8 +1,8 @@
 -module(eredis_sub_tests).
 
 -include_lib("eunit/include/eunit.hrl").
--include("eredis.hrl").
--include("eredis_sub.hrl").
+-include("../include/eredis.hrl").
+-include("../include/eredis_sub.hrl").
 
 -import(eredis, [create_multibulk/1]).
 
@@ -122,7 +122,7 @@ drop_queue_test() ->
 
     [eredis:q(Pub, [publish, foo, N]) || N <- lists:seq(1, 12)],
 
-    receive M1 -> ?assertEqual({message,<<"foo">>,<<"1">>, Sub}, M1) end,
+    receive M1 -> ?assertEqual({message, <<"foo">>, <<"1">>, Sub}, M1) end,
     receive M2 -> ?assertEqual({dropped, 11}, M2) end,
     eredis_sub:stop(Sub).
 
@@ -138,7 +138,7 @@ crash_queue_test() ->
 
     [eredis:q(Pub, [publish, foo, N]) || N <- lists:seq(1, 12)],
 
-    receive M1 -> ?assertEqual({message,<<"foo">>,<<"1">>, Sub}, M1) end,
+    receive M1 -> ?assertEqual({message, <<"foo">>, <<"1">>, Sub}, M1) end,
     receive M2 -> ?assertEqual({'DOWN', Ref, process, Sub, max_queue_size}, M2) end.
 
 
@@ -265,7 +265,7 @@ pubsub_pattern_test() ->
     ?assertEqual({ok, <<"1">>}, eredis:q(Pub, ["PUBLISH", <<"chan123">>, <<"msg">>])),
     receive
         {pmessage, _Pattern, _Channel, _Message, _} = M ->
-            ?assertEqual({pmessage, <<"chan1*">>,<<"chan123">>, <<"msg">>, Sub}, M)
+            ?assertEqual({pmessage, <<"chan1*">>, <<"chan123">>, <<"msg">>, Sub}, M)
     after 10 ->
             throw(timeout)
     end,
@@ -273,9 +273,9 @@ pubsub_pattern_test() ->
     eredis_sub:punsubscribe(Sub, [<<"chan1*">> , <<"chan2*">>]),
     eredis_sub:ack_message(Sub),
     eredis_sub:ack_message(Sub),
-    receive {unsubscribed,_,_} = M2 -> ?assertEqual({unsubscribed, <<"chan1*">>, Sub}, M2) end,
+    receive {unsubscribed, _, _} = M2 -> ?assertEqual({unsubscribed, <<"chan1*">>, Sub}, M2) end,
     eredis_sub:ack_message(Sub),
-    receive {unsubscribed,_,_} =  M3 -> ?assertEqual({unsubscribed, <<"chan2*">>, Sub}, M3) end,
+    receive {unsubscribed, _, _} =  M3 -> ?assertEqual({unsubscribed, <<"chan2*">>, Sub}, M3) end,
     eredis_sub:ack_message(Sub),
 
     ?assertEqual({ok, <<"0">>}, eredis:q(Pub, ["PUBLISH", <<"chan123">>, <<"msg">>])),

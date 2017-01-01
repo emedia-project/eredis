@@ -22,9 +22,9 @@
 %% Type of gen_server process id
 -type client() :: pid() |
                   atom() |
-                  {atom(),atom()} |
-                  {global,term()} |
-                  {via,atom(),term()}.
+                  {atom(), atom()} |
+                  {global, term()} |
+                  {via, atom(), term()}.
 
 %%
 %% PUBLIC API
