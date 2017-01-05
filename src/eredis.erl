@@ -33,7 +33,7 @@
 
 -type option() :: {host, string()}
                   | {port, integer()}
-                  | {database, string()}
+                  | {database, integer()}
                   | {password, string()}
                   | {reconnect_sleep, reconnect_sleep()}
                   | {connect_timeout, integer()}.
